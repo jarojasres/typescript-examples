@@ -1,6 +1,10 @@
-export class NumbersCollection {
+import { Sorter } from './Sorter';
 
-  constructor(public data: number[]) {}
+export class NumbersCollection extends Sorter {
+
+  constructor(public data: number[]) {
+    super();
+  }
 
   compare(leftIndex: number, rightIndex: number) : boolean {
     return this.data[leftIndex] > this.data[rightIndex];
@@ -14,6 +18,18 @@ export class NumbersCollection {
 
   get length(): number {
     return this.data.length;
+  }
+
+  sort(): void {
+    const { length } = this;
+
+    for (let i = 0; i < length; i++) {
+      for(let j = 0; j < length - i - 1; j++) {
+        if(this.compare(j, j + 1)) {
+          this.swap(j, j + 1);
+        }
+      }
+    }
   }
   
 }
